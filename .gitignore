@@ -1,0 +1,7 @@
+# Original data
+data/original/
+
+# File extensions
+*.npy
+*.pth
+*.tar.gz
