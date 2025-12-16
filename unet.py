@@ -64,6 +64,9 @@ def train_unet(
             Learning rate.
         weight_decay (`float`, defaults to `1e-2`):
             Weight decay.
+    
+    Returns:
+        `np.ndarray`: Training loss.
     """
 
     # Data loader
@@ -103,7 +106,12 @@ def train_unet(
             noise = torch.randn_like(latents)
 
             # Sample a random timestep for each image
-            timesteps = torch.randint(0, pipeline.scheduler.config.num_train_timesteps, (latents.shape[0], ), device="cuda").long()
+            timesteps = torch.randint(
+                0,
+                pipeline.scheduler.config.num_train_timesteps,
+                (latents.shape[0], ),
+                device="cuda",
+            ).long()
 
             # Add noise to latents
             noisy_latents = pipeline.scheduler.add_noise(latents, noise, timesteps)
